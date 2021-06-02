@@ -97,10 +97,18 @@ int main() {
 
     RandomSolver solver(matrix);
     auto draw_solver = [&]() {
+
+        for (auto i = solver.visited.begin(); i != solver.visited.end(); ++i) {
+            shape.setPosition(i->second * size, i->first * size);
+            shape.setFillColor(sf::Color::Yellow);
+            window.draw(shape);
+        }
+
         shape.setPosition(solver.pos('x') * size, solver.pos('y') * size);
         shape.setFillColor(sf::Color::Red);
         window.draw(shape);
-        //window.display();
+        
+        
     };
 
     while (window.isOpen())
@@ -111,11 +119,15 @@ int main() {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
+        //Random solver///////////////////////////////////////////
         if (!solver.end()) solver.step();
-        //Sleep(100);
+        if (solver.end()) std::cout << "END, solution find!!!";
+        ///////////////////////////////////////////////////////////
+        
         draw();
         draw_solver();
         window.display();
+
     }//While window is open
 
 

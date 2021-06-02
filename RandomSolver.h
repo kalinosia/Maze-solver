@@ -19,11 +19,12 @@ private:
 	bool matrix[height][width];
 	bool find;
 
-	std::vector<std::pair<int, int>> visited; //to draw where we been
+	//std::vector<std::pair<int, int>> visited; //to draw where we been
 	
 public:
 	RandomSolver(const bool matrixcome [height][width]);
 	~RandomSolver()=default; //??
+	std::vector<std::pair<int, int>> visited; //to draw where we been
 
 public:
 	bool end();

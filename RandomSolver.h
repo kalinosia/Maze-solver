@@ -17,7 +17,7 @@ private:
 	bool crossroads[4]; //for later of course most , bool because memory, size_t???
 	int last[2];//[y,x]
 	bool matrix[height][width];
-	bool find;
+	//bool find;
 
 	//std::vector<std::pair<int, int>> visited; //to draw where we been
 	

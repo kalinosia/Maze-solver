@@ -11,32 +11,8 @@
 #include "RandomSolver.h"
 
 
-//const int width = 2*40+1;
-//const int height = 2*25+1;
-
 const int size = 10;
-//const int width = 40;
-//const int height = 25;
-//sf::RenderWindow window(sf::VideoMode((size* width ), (size* height)), "Maze Solver!", sf::Style::Titlebar | sf::Style::Close);
-/*
-void draw_maze(sf::RectangleShape shape, bool maze_matrix[height][width]) {
-    &window.clear(sf::Color::Yellow);
-    for (int i = 0; i <height; i++) {
-        for (int j = 0; j <width; j++) {
-            shape.setPosition(j * size, i * size);
-            if (maze_matrix[i][j] == 1)shape.setFillColor(sf::Color::Black);
-            if (maze_matrix[i][j] == 0)shape.setFillColor(sf::Color::White);
-            window.draw(shape);
-            //window.display();
-            //Sleep(1);
 
-        }
-    }
-    
-    window.display();
-    //Sleep(100);
-}
-*/
 
 int main() {
 
@@ -45,11 +21,10 @@ int main() {
 
     //shape to draw it
     sf::RectangleShape shape{ (sf::Vector2f(size, size)) };
-    //shape.setFillColor(sf::Color::Yellow);
-    //shape.setPosition(0,0);
-   
+   // window to draw on it
     sf::RenderWindow window(sf::VideoMode((size * width), (size * height)), "Maze Solver!", sf::Style::Titlebar | sf::Style::Close);
 
+    
     bool matrix[height][width];
     int x = 0, y = 0;
     char ch;
@@ -85,17 +60,14 @@ int main() {
                 if (matrix[i][j] == 1)shape.setFillColor(sf::Color::Black);
                 if (matrix[i][j] == 0)shape.setFillColor(sf::Color::White);
                 window.draw(shape);
-                //window.display();
-                //Sleep(1);
-
             }
         }
-        //window.display();
-        //Sleep(100);
     };
     ////////////////////////////////draw();
 
     RandomSolver solver(matrix);
+
+    //draw  solver
     auto draw_solver = [&]() {
 
         for (auto i = solver.visited.begin(); i != solver.visited.end(); ++i) {
@@ -110,7 +82,7 @@ int main() {
         
         
     };
-
+    //-------------------------------------------------------------------------
     while (window.isOpen())
     {
         sf::Event event;

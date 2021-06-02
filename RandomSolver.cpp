@@ -19,8 +19,9 @@ RandomSolver::RandomSolver(const bool matrixcome[height][width]) {
     }
     x = in;
     y = 0;
-    crossroads = 0;
     
+    last[0] = y;
+    last[1] = x;
     /*
     std::string line;
     std::ifstream myfile("example.txt");
@@ -37,10 +38,16 @@ RandomSolver::RandomSolver(const bool matrixcome[height][width]) {
     */
 }
 void RandomSolver::step() {
+    if (y == 0) {//first
+        visited.push_back(std::make_pair(y, x));
+        y = y + 1;
+        std::cout << "FIRST MOVE!\n";
+        abort;///////////////////////////////
+    }
 
     int* wsk = new int;
     //*wsk = rand()%4;
-
+    /*
     crossroads = 0;
 
     if (x > 0) if (matrix[y][x - 1] == 0) crossroads += 1; //left
@@ -49,32 +56,65 @@ void RandomSolver::step() {
     if (matrix[y + 1][x] == 0) crossroads += 1; //down
     std::cout << crossroads << "\n"<<"x, y: "<<x<<" "<<y<<"\n";
     if (crossroads > 2) {
-
+    */
         while (true) {
+            find = false;
             *wsk = rand() % 4;
-            if (*wsk == 0 and x > 0 and matrix[y][x - 1] == 0) {
+            if (*wsk == 0 and x > 0 and matrix[y][x - 1] == 0  and (last[1]!=x-1)) {
                 visited.push_back(std::make_pair(y, x));
+                last[0] = y;
+                last[1] = x;
                 x = x - 1;
                 break;
             }
-            else if (*wsk == 1 and y > 0 and matrix[y - 1][x] == 0) {
+            else if (*wsk == 1 and y > 0 and matrix[y - 1][x] == 0 and (last[0] != y-1)) {
                 visited.push_back(std::make_pair(y, x));
+                last[0] = y;
+                last[1] = x;
                 y = y - 1;
                 break;
             }
-            else if (*wsk == 2 and x < width - 1 and matrix[y][x + 1] == 0) {
+            else if (*wsk == 2 and x < width - 1 and matrix[y][x + 1] == 0 and (last[1] != x + 1)) {
                 visited.push_back(std::make_pair(y, x));
+                last[0] = y;
+                last[1] = x;
                 x = x + 1;
                 break;
             }
-            else if (*wsk == 3 and y < height - 1 and matrix[y + 1][x] == 0) {
+            else if (*wsk == 3 and y < height - 1 and matrix[y + 1][x] == 0 and (last[0] != y+1)) {
                 visited.push_back(std::make_pair(y, x));
+                last[0] = y;
+                last[1] = x;
                 y = y + 1;
                 break;
             }
-            else continue;
-        }
-    }
+            else {
+
+                memset(crossroads, 0, 4);//!!
+                if (x>0) if (matrix[y][x - 1] == 0) crossroads[0] = 1; //left
+                if (y>0) if (matrix[y - 1][x] == 0) crossroads[1] = 1;//up
+                if (x<width-1) if (matrix[y][x + 1] == 0) crossroads[2] = 1;//right
+                if (y<height-1) if (matrix[y + 1][x] == 0) crossroads[3] = 1;//down
+
+                std::cout << (crossroads[0])<< (crossroads[1])<< (crossroads[2])<< ( crossroads[3]) << "\n";
+                // here not working
+                if ((crossroads[0] + crossroads[1] + crossroads[2] + crossroads[3]) == 1) {
+                    std::cout << "only one road\n";
+                    visited.push_back(std::make_pair(y, x));
+                    last[0] = y;
+                    last[1] = x;
+                    y = visited.back().first;
+                    x = visited.back().second;
+                    find = true;
+                }
+                //std::cout << "NOT ESCAPE NOT ESCAPE!!!!!!!!!!!!!!!!!!!!!!!!\n";
+                //last[0] = y;
+                //last[1] = x;
+            }//std::cout << "NOT ESCAPE NOT ESCAPE!!!!!!!!!!!!!!!!!!!!!!!!\n";
+            if (find) break;
+           
+        }//while(true)
+    /*
     //if (crossroads == 1 )
     else {
         std::cout << "ELSE!!!\n";

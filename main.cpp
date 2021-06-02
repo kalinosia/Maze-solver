@@ -90,7 +90,6 @@ int main() {
 
             }
         }
-        std::cout << "LOOP draw\n";
         //window.display();
         //Sleep(100);
     };
@@ -102,8 +101,6 @@ int main() {
         shape.setFillColor(sf::Color::Red);
         window.draw(shape);
         //window.display();
-        std::cout << "SOLVER!!\n";
-       
     };
 
     while (window.isOpen())
@@ -115,7 +112,7 @@ int main() {
                 window.close();
         }
         if (!solver.end()) solver.step();
-
+        //Sleep(100);
         draw();
         draw_solver();
         window.display();

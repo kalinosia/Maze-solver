@@ -10,7 +10,6 @@ class RandomSolver
 {
 	
 private:
-
 	int x, y;
 	int in; //{x,y=0}
 	int out; //{x,y=height-1, so only one variable

@@ -8,8 +8,8 @@
 #include <vector>
 #include <fstream>
 
-#include "RandomSolver.h"
-
+//#include "RandomSolver.h"
+#include "DepthFirstSearch.h"
 
 const int size = 10;
 
@@ -65,7 +65,9 @@ int main() {
     };
     ////////////////////////////////draw();
 
-    RandomSolver solver(matrix);
+    //RandomSolver solver(matrix);
+
+    DepthFirstSearch solver(matrix);
 
     //draw  solver
     auto draw_solver = [&]() {
